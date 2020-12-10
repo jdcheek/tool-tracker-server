@@ -13,8 +13,8 @@ const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "*",
-    credentials: false,
+    origin: "https://quirky-liskov-69fb44.netlify.app",
+    credentials: true,
   })
 );
 app.use(express.json());
