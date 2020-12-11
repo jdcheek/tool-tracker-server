@@ -3,7 +3,7 @@ const User = require("../models/user.model");
 
 const auth = async (req, res, next) => {
   try {
-    const token = await req.header("cookie").replace("tool-tracker=", "");
+    const token = await req.header("cookie").replace("tooltrackerapp=", "");
     const decoded = jwt.verify(token, process.env.AUTHTOKENSTRING);
     // TODO refactor db check
     if (decoded) {

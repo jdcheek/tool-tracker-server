@@ -18,7 +18,7 @@ authCtrl.loginUser = async (req, res) => {
     const user = await User.findByCredentials(username, password);
     const token = await user.generateAuthToken();
     res.status(200);
-    res.cookie("tool-tracker", token, {
+    res.cookie("tooltrackerapp", token, {
       maxAge: 60 * 60 * 1000,
       httpOnly: true,
       sameSite: "None",
@@ -32,7 +32,7 @@ authCtrl.loginUser = async (req, res) => {
 
 authCtrl.logOutUser = (req, res) => {
   try {
-    res.clearCookie("tool-tracker");
+    res.clearCookie("tooltrackerapp");
     res.send({ message: `Logged out successfully` });
   } catch (error) {
     res.status(400).send({ error });
@@ -42,7 +42,7 @@ authCtrl.logOutUser = (req, res) => {
 authCtrl.getUserStatus = async (req, res) => {
   try {
     if (req.header("cookie")) {
-      const token = await req.header("cookie").replace("tool-tracker=", "");
+      const token = await req.header("cookie").replace("tooltrackerapp=", "");
       const user = await User.findByToken(token);
       if (user.message === "Unauthorized Access") {
         res.status(401).send(user.message);
