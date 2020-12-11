@@ -21,7 +21,7 @@ authCtrl.loginUser = async (req, res) => {
     res.cookie("tool-tracker", token, {
       maxAge: 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: true,
+      sameSite: "None",
       secure: true,
     });
     res.send({ username: user.username, isAdmin: user.isAdmin });
