@@ -32,7 +32,12 @@ authCtrl.loginUser = async (req, res) => {
 
 authCtrl.logOutUser = (req, res) => {
   try {
-    res.clearCookie("tooltrackerapp");
+    res.clearCookie("tooltrackerapp", {
+      maxAge: 60 * 60 * 1000,
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
     res.send({ message: `Logged out successfully` });
   } catch (error) {
     res.status(400).send({ error });
