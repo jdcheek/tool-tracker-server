@@ -3,12 +3,18 @@ const authCtrl = {};
 
 authCtrl.registerUser = async (req, res) => {
   const newUser = new User(req.body);
-  try {
-    newUser.password = await User.encryptPassword(newUser.password);
-    await newUser.save();
-    res.status(201).send({ created: true });
-  } catch (error) {
-    res.status(400).send({ error });
+  if (newUser.username && newUser.password) {
+    try {
+      newUser.password = await User.encryptPassword(newUser.password);
+      await newUser.save();
+      res.status(201).send({ created: true });
+    } catch (error) {
+      res.status(400).send({ error });
+    }
+  } else {
+    res
+      .status(401)
+      .send({ message: "Please enter valid a username and password" });
   }
 };
 
