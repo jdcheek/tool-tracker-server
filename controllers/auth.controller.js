@@ -3,6 +3,22 @@ const authCtrl = {};
 
 authCtrl.registerUser = async (req, res) => {
   const newUser = new User(req.body);
+  const retypedPassword = req.body.retypedPassword;
+  console.log(newUser);
+  if (newUser.username.length < 3) {
+    res.status(400).send({ message: "Please enter a valid username" });
+    return;
+  }
+  if (newUser.password.length < 8) {
+    res.status(400).send({ message: "Please enter a valid password" });
+    return;
+  }
+  if (newUser.password !== retypedPassword) {
+    console.log(newUser.password, newUser.retypedPassword);
+    res.status(400).send({ message: "Passwords do not match" });
+    return;
+  }
+
   try {
     newUser.password = await User.encryptPassword(newUser.password);
     await newUser.save();
