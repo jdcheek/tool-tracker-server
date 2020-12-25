@@ -4,7 +4,6 @@ const authCtrl = {};
 authCtrl.registerUser = async (req, res) => {
   const newUser = new User(req.body);
   const retypedPassword = req.body.retypedPassword;
-  console.log(newUser);
   if (newUser.username.length < 3) {
     res.status(400).send({ message: "Please enter a valid username" });
     return;
@@ -20,6 +19,7 @@ authCtrl.registerUser = async (req, res) => {
   }
 
   try {
+    newUser.username = newUser.username.toLowerCase();
     newUser.password = await User.encryptPassword(newUser.password);
     await newUser.save();
     res.status(201).send({ created: true });
