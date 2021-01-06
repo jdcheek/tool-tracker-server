@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "https://quirky-liskov-69fb44.netlify.app",
+    origin: "https://gm-tool-tracker.netlify.app",
     credentials: true,
   })
 );
