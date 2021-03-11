@@ -40,10 +40,14 @@ authCtrl.loginUser = async (req, res) => {
       sameSite: "None",
       secure: true,
     });
-    res.send({ username: user.username, isAdmin: user.isAdmin });
+    res.send({
+      isLoggedIn: true,
+      username: user.username,
+      isAdmin: user.isAdmin,
+      toolsCheckedOut: user.toolsCheckedOut,
+    });
   } catch (error) {
-    res.status(400).send({ error });
-  }
+    res.status(400).send("There was an issue with your request");
 };
 
 authCtrl.logOutUser = (req, res) => {
