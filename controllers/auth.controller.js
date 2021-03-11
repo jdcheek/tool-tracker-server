@@ -48,6 +48,7 @@ authCtrl.loginUser = async (req, res) => {
     });
   } catch (error) {
     res.status(400).send("There was an issue with your request");
+  }
 };
 
 authCtrl.logOutUser = (req, res) => {
@@ -58,7 +59,7 @@ authCtrl.logOutUser = (req, res) => {
       sameSite: "None",
       secure: true,
     });
-    res.send({ message: `Logged out successfully` });
+    res.send(`Logged out successfully`);
   } catch (error) {
     res.status(400).send({ error });
   }
