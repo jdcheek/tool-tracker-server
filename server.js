@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "https://j-tool-tracker.netlify.app",
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
 );
