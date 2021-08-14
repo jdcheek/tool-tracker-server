@@ -14,7 +14,7 @@ userCtrl.updateUser = async (req, res) => {
   const updateUser = {};
   updateUser.username = req.body.username;
   updateUser.isAdmin = req.body.isAdmin;
-  if (req.body.password !== "") {
+  if (req.body.password !== "" || req.body.password !== undefined) {
     updateUser.password = await User.encryptPassword(req.body.password);
   }
   try {
