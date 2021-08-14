@@ -42,7 +42,9 @@ inventoryCtrl.getInventoryById = async (req, res) => {
 
 inventoryCtrl.deleteInventory = async (req, res) => {
   try {
-    const deleteItem = await Inventory.findByIdAndDelete(req.params.id);
+    const deleteItem = await Inventory.findByIdAndDelete({
+      _id: req.params.id,
+    });
     res.status(200).send({ itemDeleted: true });
   } catch (error) {
     res.status(400).send(error);
