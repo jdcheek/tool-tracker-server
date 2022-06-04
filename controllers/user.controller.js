@@ -18,7 +18,7 @@ userCtrl.updateUser = async (req, res) => {
     updateUser.password = await User.encryptPassword(req.body.password);
   }
   try {
-    await User.findByIdAndUpdate({ _id: req.params.id }, { $set: updateUser });
+    await User.findByIdAndUpdate(req.params.id, { $set: updateUser });
     res.status(200).send({ message: "User updated" });
   } catch (error) {
     res.status(400).send({ error });
